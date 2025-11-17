@@ -1,0 +1,5 @@
+{
+  "name": "LLM Demystifier",
+  "description": "An interactive tool to demystify Large Language Models. Chat with Gemini Pro and Gemini Flash side-by-side, allowing inspection of API calls, performance metrics, and token usage for each turn in the conversation.",
+  "requestFramePermissions": []
+}
