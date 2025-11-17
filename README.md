@@ -1,5 +1,5 @@
 <div align="center">
-<img alt="Preview Image" src=".github/previewLLM.png" />
+<img alt="Preview Image" src=".github/preview_LLM.png" />
 </div>
 
 ## Run Locally
