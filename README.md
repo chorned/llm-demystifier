@@ -1,12 +1,14 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+<img alt="Preview" src="https://github.com/chorned/llm-demystifier/blob/main/.github/preview_LLM.png" />
 </div>
 
-# Run and deploy your AI Studio app
+# The LLM Demystifier
 
-This contains everything you need to run your app locally.
+This app helps you build an intuition for how conversational agents increase their token usage over time. The App also makes it transparent what happens in each API call, and explains all the parameters in the response message.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1hPSK6lR20vWK5vDYCMXIPQsCnJmyncXs
+Built with Google AI Studio
+
+https://www.linkedin.com/in/carlhorned/
 
 ## Run Locally
 
