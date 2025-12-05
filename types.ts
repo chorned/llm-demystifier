@@ -1,7 +1,8 @@
 
 import { GenerateContentResponse } from "@google/genai";
 
-export type Model = 'gemini-2.5-pro' | 'gemini-flash-latest';
+// FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+export type Model = 'gemini-3-pro-preview' | 'gemini-flash-latest';
 
 export interface Metrics {
   duration: number;

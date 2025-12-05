@@ -1,8 +1,9 @@
+
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { Model, Message } from './types';
 import { MODELS, MODEL_PRICING, MODEL_NAMES } from './constants';
-import PasswordGate from './components/PasswordGate';
+import WelcomeScreen from './components/WelcomeScreen';
 import ChatColumn from './components/ChatColumn';
 import PromptInput from './components/PromptInput';
 import AnalyticsView from './components/AnalyticsView';
@@ -14,24 +15,29 @@ declare global {
 }
 
 const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [showWelcomeScreen, setShowWelcomeScreen] = useState<boolean>(true);
   const [isAnalyticsVisible, setIsAnalyticsVisible] = useState<boolean>(false);
   const [prompt, setPrompt] = useState<string>('');
+  // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
   const [histories, setHistories] = useState<Record<Model, Message[]>>({
-    'gemini-2.5-pro': [],
+    'gemini-3-pro-preview': [],
     'gemini-flash-latest': [],
   });
+  // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
   const [loadingStates, setLoadingStates] = useState<Record<Model, boolean>>({
-    'gemini-2.5-pro': false,
+    'gemini-3-pro-preview': false,
     'gemini-flash-latest': false,
   });
+  // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
   const [totalSessionTokens, setTotalSessionTokens] = useState<Record<Model, number>>({
-    'gemini-2.5-pro': 0,
+    'gemini-3-pro-preview': 0,
     'gemini-flash-latest': 0,
   });
-  const [activeMobileModel, setActiveMobileModel] = useState<Model>('gemini-2.5-pro');
+  // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+  const [activeMobileModel, setActiveMobileModel] = useState<Model>('gemini-3-pro-preview');
+  // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
   const [tokenHistories, setTokenHistories] = useState<Record<Model, number[]>>({
-    'gemini-2.5-pro': [],
+    'gemini-3-pro-preview': [],
     'gemini-flash-latest': [],
   });
 
@@ -41,10 +47,6 @@ const App: React.FC = () => {
   const proChartInstanceRef = useRef<any>(null);
   const flashChartInstanceRef = useRef<any>(null);
 
-
-  const handlePasswordSuccess = () => {
-    setIsAuthenticated(true);
-  };
 
   const handleSubmit = useCallback(async () => {
     if (!prompt.trim()) return;
@@ -62,7 +64,8 @@ const App: React.FC = () => {
 
     setHistories(newHistories);
     setPrompt('');
-    setLoadingStates({ 'gemini-2.5-pro': true, 'gemini-flash-latest': true });
+    // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+    setLoadingStates({ 'gemini-3-pro-preview': true, 'gemini-flash-latest': true });
 
     MODELS.forEach(async (model) => {
       const startTime = Date.now();
@@ -150,8 +153,10 @@ const App: React.FC = () => {
             datasets: [{
               label: 'Total Session Tokens',
               data,
-              borderColor: modelType === 'gemini-2.5-pro' ? '#3b82f6' : '#10b981',
-              backgroundColor: modelType === 'gemini-2.5-pro' ? 'rgba(59, 130, 246, 0.5)' : 'rgba(16, 185, 129, 0.5)',
+              // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+              borderColor: modelType === 'gemini-3-pro-preview' ? '#3b82f6' : '#10b981',
+              // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+              backgroundColor: modelType === 'gemini-3-pro-preview' ? 'rgba(59, 130, 246, 0.5)' : 'rgba(16, 185, 129, 0.5)',
               tension: 0.2,
               fill: true,
             }]
@@ -173,14 +178,15 @@ const App: React.FC = () => {
       }
     };
 
-    updateChart('gemini-2.5-pro', proChartRef, proChartInstanceRef);
+    // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+    updateChart('gemini-3-pro-preview', proChartRef, proChartInstanceRef);
     updateChart('gemini-flash-latest', flashChartRef, flashChartInstanceRef);
 
   }, [tokenHistories]);
 
 
-  if (!isAuthenticated) {
-    return <PasswordGate onSuccess={handlePasswordSuccess} />;
+  if (showWelcomeScreen) {
+    return <WelcomeScreen onEnter={() => setShowWelcomeScreen(false)} />;
   }
 
   const isLoading = Object.values(loadingStates).some(s => s);

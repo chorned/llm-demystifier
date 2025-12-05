@@ -48,7 +48,8 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ histories, onClose }) => 
     chartInstancesRef.current.forEach(instance => instance.destroy());
     chartInstancesRef.current = [];
 
-    const proHistory = histories['gemini-2.5-pro'].filter(m => m.role === 'model' && m.metrics);
+    // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+    const proHistory = histories['gemini-3-pro-preview'].filter(m => m.role === 'model' && m.metrics);
     const flashHistory = histories['gemini-flash-latest'].filter(m => m.role === 'model' && m.metrics);
 
     const numTurns = Math.min(proHistory.length, flashHistory.length);
@@ -58,15 +59,18 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ histories, onClose }) => 
 
     const datasets = {
         tokens: [
-            { label: MODEL_NAMES['gemini-2.5-pro'], data: proHistory.map(m => m.metrics!.inputTokens + m.metrics!.outputTokens), borderColor: '#3b82f6', backgroundColor: '#3b82f6_80', tension: 0.1 },
+            // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+            { label: MODEL_NAMES['gemini-3-pro-preview'], data: proHistory.map(m => m.metrics!.inputTokens + m.metrics!.outputTokens), borderColor: '#3b82f6', backgroundColor: '#3b82f6_80', tension: 0.1 },
             { label: MODEL_NAMES['gemini-flash-latest'], data: flashHistory.map(m => m.metrics!.inputTokens + m.metrics!.outputTokens), borderColor: '#10b981', backgroundColor: '#10b981_80', tension: 0.1 },
         ],
         time: [
-            { label: MODEL_NAMES['gemini-2.5-pro'], data: proHistory.map(m => m.metrics!.duration), borderColor: '#3b82f6', backgroundColor: '#3b82f6_80', tension: 0.1 },
+            // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+            { label: MODEL_NAMES['gemini-3-pro-preview'], data: proHistory.map(m => m.metrics!.duration), borderColor: '#3b82f6', backgroundColor: '#3b82f6_80', tension: 0.1 },
             { label: MODEL_NAMES['gemini-flash-latest'], data: flashHistory.map(m => m.metrics!.duration), borderColor: '#10b981', backgroundColor: '#10b981_80', tension: 0.1 },
         ],
         cost: [
-            { label: MODEL_NAMES['gemini-2.5-pro'], data: proHistory.map(m => m.metrics!.turnCost * 100), borderColor: '#3b82f6', backgroundColor: '#3b82f6_80', tension: 0.1 },
+            // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+            { label: MODEL_NAMES['gemini-3-pro-preview'], data: proHistory.map(m => m.metrics!.turnCost * 100), borderColor: '#3b82f6', backgroundColor: '#3b82f6_80', tension: 0.1 },
             { label: MODEL_NAMES['gemini-flash-latest'], data: flashHistory.map(m => m.metrics!.turnCost * 100), borderColor: '#10b981', backgroundColor: '#10b981_80', tension: 0.1 },
         ],
     };
@@ -110,7 +114,7 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ histories, onClose }) => 
 
   }, [histories]);
 
-  const hasData = histories['gemini-2.5-pro'].some(m => m.role === 'model' && m.metrics);
+  const hasData = histories['gemini-flash-latest'].some(m => m.role === 'model' && m.metrics);
 
   return (
     <div className="fixed inset-0 bg-gray-900/90 backdrop-blur-sm z-50 flex flex-col p-4 md:p-8" aria-modal="true" role="dialog">

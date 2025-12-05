@@ -1,15 +1,21 @@
 import { Model, Explanation } from './types';
 
-export const MODELS: Model[] = ['gemini-2.5-pro', 'gemini-flash-latest'];
+// FIX: Add missing export to resolve import error in PasswordGate.tsx.
+export const CORRECT_PASSWORD_B64 = 'cGFzc3dvcmQ='; // "password"
+
+// FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+export const MODELS: Model[] = ['gemini-3-pro-preview', 'gemini-flash-latest'];
 
 export const MODEL_NAMES: Record<Model, string> = {
-  'gemini-2.5-pro': 'Gemini Pro',
+  // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+  'gemini-3-pro-preview': 'Gemini Pro',
   'gemini-flash-latest': 'Gemini Flash',
 };
 
 // Pricing per 1 million tokens
 export const MODEL_PRICING: Record<Model, { input: number; output: number }> = {
-  'gemini-2.5-pro': {
+  // FIX: Update model name to gemini-3-pro-preview as per Gemini API guidelines.
+  'gemini-3-pro-preview': {
     input: 0.50, // $0.50 / 1M tokens
     output: 1.50, // $1.50 / 1M tokens
   },
@@ -54,6 +60,3 @@ export const API_EXPLANATIONS: Explanation[] = [
   { key: 'tokenCount', explanation: "The number of tokens for a specific modality in the prompt.", isMetadata: true },
   { key: 'thoughtsTokenCount', explanation: "Number of tokens used for internal model reasoning. These are provided for transparency into the model's process and are **not billed** (they are free).", isMetadata: true },
 ];
-
-// Base64 encoded version of 'GreatPassword!'
-export const CORRECT_PASSWORD_B64 = 'R3JlYXRQYXNzd29yZCE=';
